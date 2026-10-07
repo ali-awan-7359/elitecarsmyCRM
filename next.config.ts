@@ -1,14 +1,11 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
-  experimental: {
-    agentFeedback: true,
-  },
-  cacheComponents: true,
-  partialPrefetching: true,
   reactCompiler: true,
   turbopack: {
+    // A stray package.json one level up confuses Turbopack's workspace root
+    // detection and makes it ignore this project's lockfile. Pin the root here.
+    root: __dirname,
     rules: {
       "*.css": {
         loaders: ["@tailwindcss/turbopack"],
